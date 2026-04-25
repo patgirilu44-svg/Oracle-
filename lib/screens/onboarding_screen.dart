@@ -73,7 +73,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ),
       );
     } catch (e) {
-      setState(() => _error = 'kuch galat hua: \$e');
+      setState(() => _error = 'kuch galat hua: $e');
     } finally {
       if (mounted) setState(() => _submitting = false);
     }
