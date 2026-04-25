@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'core/supabase_client.dart';
+import 'screens/onboarding_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await OracleSupabase.init();
   runApp(const OracleApp());
 }
 
@@ -29,8 +33,28 @@ class OracleApp extends StatelessWidget {
   }
 }
 
-class OracleSplash extends StatelessWidget {
+class OracleSplash extends StatefulWidget {
   const OracleSplash({super.key});
+
+  @override
+  State<OracleSplash> createState() => _OracleSplashState();
+}
+
+class _OracleSplashState extends State<OracleSplash> {
+  @override
+  void initState() {
+    super.initState();
+    _navigate();
+  }
+
+  Future<void> _navigate() async {
+    await Future.delayed(const Duration(seconds: 2));
+    if (!mounted) return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const OnboardingScreen()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
